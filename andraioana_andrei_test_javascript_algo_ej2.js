@@ -22,6 +22,10 @@ function checkAllNumbers(A){
 }
 
 function checkAllDifferent(A){
+    result = {
+        wrongRow : [],
+        rowNumber : -1
+    }
     for (let i = 0; i < 9; i++) 
     {
         let rowNumberList = [] 
@@ -29,9 +33,13 @@ function checkAllDifferent(A){
         {
             if (rowNumberList.includes(A[i][j]))
             {
-                console.log(rowNumberList)
-                console.log("Wrong number: "+A[j][i]+" in position: ["+i+"]["+j+"]")
-                return false
+                console.log("Wrong number: "+A[i][j]+" in position: ["+i+"]["+j+"]")
+                for(let k = 0; k < 9; k++)
+                {
+                    result.wrongRow.push(A[i][k])
+                }
+                result.rowNumber = i+1
+                return result
             }
             else
             {
@@ -41,7 +49,7 @@ function checkAllDifferent(A){
         }
     }
 
-    return true
+    return result
 }
 
 function F21(A){
@@ -50,9 +58,10 @@ function F21(A){
     if(allNumbers === false)
         return false
     allDifferent = checkAllDifferent(A)
-    if (allDifferent === false)
-        return false
-    return true
+    // console.log(allDifferent.length)
+    // if (allDifferent === false)
+    //     return false
+    return allDifferent
 }
 
 
